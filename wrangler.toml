@@ -1,0 +1,5 @@
+name = "periodical-feed"
+main = "src/index.ts"
+compatibility_date = "2022-07-14"
+node_compat = true
+
