@@ -6,7 +6,8 @@ Yorker/Atlantic/Wired/Guardian)
 
 # 使用
 
-根据个人需求配置好链接中的参数，将其粘贴到[Download2iBook](https://www.icloud.com/shortcuts/62a6dd0fbb2a482295a8036c05725170)导入问题的回答框即可  
+根据个人需求配置好链接中的参数，将其粘贴到[Download2iBook](https://www.icloud.com/shortcuts/62a6dd0fbb2a482295a8036c05725170)
+导入问题的回答框即可  
 [https://your.own.site/feed?magazine=<MAGAZINE_NAME>&date=<DATE>&filetype=<FILE_TYPE>&action=\<ACTION\>](https://your.own.site/feed?magazine=<MAGAZINE_NAME>&date=<DATE>&filetype=<FILE_TYPE>&action=<ACTION>)
 
 | 键             | 描述        | 值                                                        |
@@ -20,4 +21,26 @@ Yorker/Atlantic/Wired/Guardian)
 ACTION的各个取值的逻辑如下：  
 url：网站会返回指定刊物的GitHub下载链接；  
 redirect：会将该网址定重向到Github的下载链接；  
-download：会在后台将所请求的内容下载本地，并返回给请求者。  
+download：会在后台将所请求的内容下载本地，并返回给请求者。
+
+# 构建
+
+在构建本项目前，需要满足有如下条件：
+- nodejs环境
+- [Cloudflare](https://www.cloudflare.com/)账号
+- 域名（可选，使用cloudflare workers提供的子域名`*.workers.dev`在墙内无法正常访问）
+- 科学上网工具（可选，在执行`wangler publish`时，无科学上网工具会导致无法上传代码到Cloudflare）
+
+```sh
+# Clone this repo
+git clone https://github.com/JokinYang/periodical-feed.git
+cd periodical-feed
+# Install wrangler and other packages
+npm install -g wrangler
+npm install 
+# Login to Cloudflare
+wrangler login
+# Publish to Cloudflare workers
+wrangler publish
+```
+绑定域名：Workers>periodical-feed>触发器>自定义域>添加自定义域
